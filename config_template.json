@@ -1,0 +1,32 @@
+{
+    "configurations": [
+      {
+        "task": "config1",
+        "time": true,
+        "ip": true,
+        "hostname": true,
+        "total_memory": false,
+        "used_memory": false,
+        "gpu_memory": true
+      },
+      {
+        "task": "config2",
+        "time": true,
+        "ip": true,
+        "hostname": false,
+        "total_memory": true,
+        "used_memory": true,
+        "gpu_memory": false
+      },
+      {
+        "task": "config3",
+        "time": true,
+        "ip": false,
+        "hostname": true,
+        "total_memory": true,
+        "used_memory": true,
+        "gpu_memory": true
+      }
+    ]
+  }
+  

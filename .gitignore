@@ -1,0 +1,2 @@
+*.json
+!config_template.json
