@@ -112,12 +112,19 @@ for task in $(echo "$config_data" | jq -r '.configurations[].task'); do
   #   gpu_memory_total+=("N/A")
   # done
   
-  # 获取磁盘使用量
+  # 获取磁盘家目录使用量
   if [[ $(echo "$current_config"| jq -r '.disk_usage_home') == "true" ]]; then
     home_usage=$(df -h | awk '/\/home$/ {print $3}')
     home_total=$(df -h | awk '/\/home$/ {print $2}')
     construct_json_field "home_usage" "$home_usage"
     construct_json_field "home_total" "$home_total"
+  fi
+  # 获取磁盘根目录使用量
+  if [[ $(echo "$current_config"| jq -r '.disk_usage_root') == "true" ]]; then
+    root_usage=$(df -h | awk '/\/$/ {print $3}')
+    root_total=$(df -h | awk '/\/$/ {print $2}')
+    construct_json_field "root_usage" "$root_usage"
+    construct_json_field "root_total" "$root_total"
   fi
 
 
@@ -151,7 +158,7 @@ for task in $(echo "$config_data" | jq -r '.configurations[].task'); do
 
   # 发送JSON数据到URL
   # curl -X POST -H "Content-Type: application/json" -d "@status.json" "$url"
-  curl -X POST -H "Content-Type: application/json" -d "$json_data" "$url"
+  # curl -X POST -H "Content-Type: application/json" -d "$json_data" "$url"
   # echo "$url"
 done
 
