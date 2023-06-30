@@ -1,32 +1,36 @@
 {
-    "configurations": [
-      {
-        "task": "config1",
-        "time": true,
-        "ip": true,
-        "hostname": true,
-        "total_memory": false,
-        "used_memory": false,
-        "gpu_memory": true
-      },
-      {
-        "task": "config2",
-        "time": true,
-        "ip": true,
-        "hostname": false,
-        "total_memory": true,
-        "used_memory": true,
-        "gpu_memory": false
-      },
-      {
-        "task": "config3",
-        "time": true,
-        "ip": false,
-        "hostname": true,
-        "total_memory": true,
-        "used_memory": true,
-        "gpu_memory": true
-      }
-    ]
-  }
-  
+  "configurations": [
+    // {
+    //   "task": "config1",
+    //   "time": true,
+    //   "ip": true,
+    //   "hostname": true,
+    //   "total_memory": false,
+    //   "used_memory": false,
+    //   "gpu_memory": true
+    // },
+    // {
+    //   "task": "config2",
+    //   "time": true,
+    //   "ip": true,
+    //   "hostname": false,
+    //   "total_memory": true,
+    //   "used_memory": true,
+    //   "gpu_memory": false
+    // },
+    {
+      "task": "3090x2",
+      "url": "http://localhost:3000",
+      // "hostname": true,
+      "cpu_usage":true,
+      //内存使用情况
+      "memory_usage":true,
+      // "total_memory": true,
+      // "used_memory": true,
+      // "gpu_memory": true,
+      "gpu_usage":true,
+      "gpu_ids":[0,1],
+      "disk_usage_home":true
+    }
+  ]
+}
