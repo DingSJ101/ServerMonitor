@@ -9,3 +9,10 @@ write your own configuration there
 ```bash
 bash ServerMonitor.sh
 ```
+
+
+### set cron task to run script periodically
+```crontab
+# run every 10 minutes
+*/10 * * * * bash absolute_path/ServerMonitor.sh >> absolute_path/log.txt
+```
