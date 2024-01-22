@@ -21,6 +21,13 @@ construct_json_field() {
 # construct_json_field "key2" "$value2" "END"
 # add "END" flag at the last item
 
+# 获取系统默认语言
+system_language=$(locale | grep "LANG=" | cut -d'=' -f2)
+if [[ "$system_language" == "zh_CN.UTF-8" ]]; then
+  SYS_LANG="zh_CN"
+else
+  SYS_LANG="en_US"
+fi
 
 # 读取配置文件
 script_dir=$(dirname "$0")
@@ -60,10 +67,15 @@ for task in $(echo "$config_data" | jq -r '.configurations[].task'); do
   fi
 
   if [[ $(echo "$current_config"| jq -r '.memory_usage') == "true" ]]; then
-    # 获取内存总量
-    total_memory=$(free -h | grep 'Mem' | awk '{print $2}')
-    # 获取已使用内存量
-    used_memory=$(free -h | grep 'Mem' | awk '{print $3}')
+    if [[ "$SYS_LANG" == "zh"* ]];then
+      # 获取内存总量
+      # 获取已使用内存量
+      total_memory=$(free -h | grep '内存' | awk '{print $2}')
+      used_memory=$(free -h | grep '内存' | awk '{print $3}')
+    else 
+      total_memory=$(free -h | grep 'Mem' | awk '{print $2}')
+      used_memory=$(free -h | grep 'Mem' | awk '{print $3}')
+    fi 
     construct_json_field "total_memory" "$total_memory"
     construct_json_field "used_memory" "$used_memory"
   fi
@@ -167,4 +179,3 @@ done
 #FIXME - 需要设置VPN
 #FIXME - 需要设置ssh配置和登录脚本
 
-# TODO - 设置多个webhook监听不同任务
